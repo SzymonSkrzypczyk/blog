@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("user_id")->constrained()->cascadeOnDelete();
+            $table->foreignId("post_id")->constrained()->cascadeOnDelete();
+            $table->tinyInteger("vote")->default(0)->comment('1 for upvote, -1 for downvote');
             $table->timestamps();
         });
     }
