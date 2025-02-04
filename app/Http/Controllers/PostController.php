@@ -6,25 +6,29 @@ use App\Http\Controllers\Controller;
 use \Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(): Response
     {
         $results = Post::all();
 
-        return response()->json($results);
+        return Inertia::render('Posts/Index', [
+            'posts' => $results
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): Response
     {
-        //
+        return Inertia::render('Posts/Create');
     }
 
     /**
@@ -32,17 +36,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Post::create($request->all());
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id): JsonResponse
+    public function show(string $id): Response
     {
         $result = Post::findOrFail($id);
 
-        return response()->json($result);
+        return Inertia::render('Posts/Show', [
+            'post' => $result
+        ]);
     }
 
     /**
@@ -50,7 +56,9 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return Inertia::render('Posts/Edit', [
+            'post' => Post::findOrFail($id)
+        ]);
     }
 
     /**
@@ -58,7 +66,9 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return Inertia::render('Posts/Update', [
+            'post' => Post::findOrFail($id)
+        ]);
     }
 
     /**
@@ -66,6 +76,8 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Post::destroy($id);
+
+        return Inertia::render('Posts/Destroy');
     }
 }
