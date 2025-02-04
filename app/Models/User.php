@@ -35,7 +35,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    private bool $is_admin;
+    // private bool $is_admin;
 
     /**
      * Get the attributes that should be cast.
