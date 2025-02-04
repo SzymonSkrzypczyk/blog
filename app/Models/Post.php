@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,8 +11,8 @@ use Illuminate\Support\Facades\Validator;
 
 class Post extends Model
 {
-    //
-    protected $fillable = ['user_id', 'title', 'slug', 'content', 'html_content', 'published_at'];
+    use HasFactory;
+    protected $fillable = ['user_id', 'title', 'slug', 'content', 'published_at'];
     protected $casts = ['published_at' => 'datetime'];
 
     public static function validate($data)

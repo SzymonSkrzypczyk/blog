@@ -7,6 +7,8 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use \Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 class User extends Authenticatable
 {
@@ -33,6 +35,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    private bool $is_admin;
 
     /**
      * Get the attributes that should be cast.
@@ -47,22 +50,22 @@ class User extends Authenticatable
         ];
     }
 
-    public function posts()
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
 
-    public function comments()
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
 
-    public function votes()
+    public function votes(): HasMany
     {
         return $this->hasMany(Vote::class);
     }
 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return $this->is_admin;
     }
