@@ -1,3 +1,9 @@
+export interface Tag {
+    id: number;
+    name: string;
+    slug: string;
+}
+
 export interface Post {
     id: number;
     title: string;
@@ -5,4 +11,5 @@ export interface Post {
     content: string;
     published_at: string | null;
     image?: string;
+    tags: Tag[];
 }

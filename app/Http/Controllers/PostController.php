@@ -16,12 +16,13 @@ class PostController extends Controller
      */
     public function index(): Response
     {
-        $results = Post::all();
+        $results = Post::with('tags')->get();
 
         return Inertia::render('Posts/Index', [
             'posts' => $results
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -44,10 +45,17 @@ class PostController extends Controller
      */
     public function show(string $id): Response
     {
-        $result = Post::findOrFail($id);
+        $post = Post::with('comments', 'votes', 'tags')->findOrFail($id);
+
+        $comments = $post->comments;
+        $votes = $post->votes;
+        $tags = $post->tags;
 
         return Inertia::render('Posts/Show', [
-            'post' => $result
+            'post' => $post,
+            'comments' => $comments,
+            'votes' => $votes,
+            'tags' => $tags
         ]);
     }
 
