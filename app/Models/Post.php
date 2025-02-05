@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'title', 'slug', 'content', 'published_at'];
+    protected $fillable = ['user_id', 'title', 'slug', 'content', 'published_at', 'image'];
     protected $casts = ['published_at' => 'datetime'];
 
     public static function validate($data)
