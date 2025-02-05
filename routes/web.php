@@ -33,5 +33,9 @@ Route::resource('posts', PostController::class);
 Route::resource('comments', CommentController::class);
 
 
+Route::get("/about", function () {
+   return Inertia::render("About");
+});
+
 
 require __DIR__.'/auth.php';
