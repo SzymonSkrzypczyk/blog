@@ -56,7 +56,7 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('Posts/Edit', [
+        return Inertia::render('Posts/Create', [
             'post' => Post::findOrFail($id)
         ]);
     }
@@ -66,9 +66,7 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return Inertia::render('Posts/Update', [
-            'post' => Post::findOrFail($id)
-        ]);
+        Post::findOrFail($id)->update($request->all());
     }
 
     /**
@@ -78,6 +76,10 @@ class PostController extends Controller
     {
         Post::destroy($id);
 
-        return Inertia::render('Posts/Destroy');
+        $results = Post::all();
+
+        return Inertia::render('Posts/Index', [
+            'posts' => $results
+        ]);
     }
 }
