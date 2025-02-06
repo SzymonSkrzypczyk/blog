@@ -62,17 +62,20 @@ class PostController extends Controller
      */
     public function show(string $id): Response
     {
-        $post = Post::with('comments', 'votes', 'tags')->findOrFail($id);
+        $post = Post::with('comments.author', 'votes', 'tags')->findOrFail($id);
 
         $comments = $post->comments;
         $votes = $post->votes;
         $tags = $post->tags;
 
+        $summed_points = $votes->sum('vote');
+
         return Inertia::render('Posts/Show', [
             'post' => $post,
             'comments' => $comments,
             'votes' => $votes,
-            'tags' => $tags
+            'tags' => $tags,
+            'points_summed' => $summed_points
         ]);
     }
 
