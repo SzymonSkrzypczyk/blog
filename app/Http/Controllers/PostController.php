@@ -16,12 +16,14 @@ class PostController extends Controller
      */
     public function index(): Response
     {
-        $results = Post::with('tags')->get();
+        $results = Post::with('tags')->paginate(9);
 
         return Inertia::render('Posts/Index', [
-            'posts' => $results
+            'posts' => $results->items(),
+            'nextPageUrl' => $results->nextPageUrl(),
         ]);
     }
+
 
 
     /**
