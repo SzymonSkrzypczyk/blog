@@ -1,4 +1,4 @@
-export interface Tag {
+export interface TagName {
     id: number;
     name: string;
     slug: string;
@@ -11,5 +11,5 @@ export interface Post {
     content: string;
     published_at: string | null;
     image?: string;
-    tags: Tag[];
+    tags: TagName[];
 }

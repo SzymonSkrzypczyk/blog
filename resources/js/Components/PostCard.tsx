@@ -1,23 +1,36 @@
 import { Link } from '@inertiajs/react';
 import { Post } from "@/types/Post"; // Ensure correct import path
+import Tag from "./Tag";
 
 interface PostCardProps {
     post: Post;
 }
 
 export default function PostCard({ post }: PostCardProps) {
+    // Ensure published_at is valid before formatting
+    const formattedDate = post.published_at
+        ? new Intl.DateTimeFormat("en-US", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }).format(new Date(post.published_at))
+        : "Date not available";
+
     return (
-        <div className="flex flex-col bg-[#020024] rounded">
-            <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="image"
-                 className="w-100% p-2 rounded"/>
-            <h2 className="text-3xl p-2 w-200 text-[#EAE9FC]">Why we are discontinuing company sources and moving
-                forward with squads</h2>
-            <div className="flex flex-row gap-3 p-2">
-                <span className="inline-block px-4 py-2 rounded bg-[#473FDE] text-[#EAE9FC]">tag 1</span>
-                <span className="inline-block px-4 py-2 bg-[#473FDE] text-[#EAE9FC] rounded">tag 1</span>
-                <span className="inline-block px-4 py-2 bg-[#473FDE] text-[#EAE9FC] rounded">tag 1</span>
+        <div className="flex flex-col bg-[#020024] rounded-md hover:bg-[#3a31d8] overflow-hidden h-full">
+            <img
+                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+                alt="image"
+                className="w-full h-40 object-cover rounded-t-md"
+            />
+            <h2 className="text-3xl p-2 text-[#EAE9FC] line-clamp-2">{post.title}</h2>
+            <div className="flex flex-wrap gap-2 p-2">
+                {post.tags.map(tag => (
+                    <Tag key={tag.id} tag={tag} />
+                ))}
             </div>
-            <p className="text-[#0A03EA] p-2 text-xl">February 5, 2025</p>
+            <p className="text-[#f3f2fd] p-2 text-xl mt-auto">{formattedDate}</p>
         </div>
     );
 }
