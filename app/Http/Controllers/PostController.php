@@ -17,9 +17,11 @@ class PostController extends Controller
     public function index(): Response
     {
         $results = Post::with('tags')->paginate(9);
+        $all_tags = Post::all()->pluck('tags')->flatten()->unique();
 
         return Inertia::render('Posts/Index', [
             'posts' => $results->items(),
+            'tags' => $all_tags,
             'nextPageUrl' => $results->nextPageUrl(),
         ]);
     }
