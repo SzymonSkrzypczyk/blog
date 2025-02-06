@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use \Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -14,10 +15,21 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $results = Post::with('tags')->paginate(9);
-        $all_tags = Post::all()->pluck('tags')->flatten()->unique();
+        $tag = $request->query('tag');
+
+        if ($tag) {
+            $results = Post::with('tags')
+                ->whereHas('tags', function ($query) use ($tag) {
+                    $query->where('slug', $tag);
+                })
+                ->paginate(9);
+        } else {
+            $results = Post::with('tags')->paginate(9);
+        }
+
+        $all_tags = Tag::all();
 
         return Inertia::render('Posts/Index', [
             'posts' => $results->items(),
@@ -25,6 +37,7 @@ class PostController extends Controller
             'nextPageUrl' => $results->nextPageUrl(),
         ]);
     }
+
 
 
 

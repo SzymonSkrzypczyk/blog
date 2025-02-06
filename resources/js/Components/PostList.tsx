@@ -8,7 +8,7 @@ interface PostListProps {
 
 export default function PostList({ posts }: PostListProps) {
     return (
-        <div className="flex flex-col gap-4 w-4/6 mx-auto">
+        <div className="flex flex-col gap-4 w-4/6 mx-auto shadow-md">
             <h1 className="text-4xl m-2 text-[#ebe9fc]">Latest Posts</h1>
             <div className="grid grid-cols-3 gap-4 mx-2">
                 {posts.map(post => (
