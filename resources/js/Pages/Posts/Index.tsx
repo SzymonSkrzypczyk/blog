@@ -17,7 +17,7 @@ export default function Index() {
 
     return (
         <div className="bg-[#010104] h-full">
-            <Head title="Posts" />
+            <Head title="Blog" />
             <NavBar />
             <TagsList tags={tags} />
             <PostList posts={posts} />
