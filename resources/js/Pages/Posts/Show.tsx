@@ -3,6 +3,7 @@ import { usePage } from '@inertiajs/react';
 import { Post, TagName, Vote, Comment } from '@/types/Post';
 import { PageProps } from "@/types";
 import NavBarShow from "@/Components/NavBarShow";
+import FormCreateComment from "@/Components/FormCreateComment";
 
 interface PagePropsShow extends PageProps {
     post: Post;
@@ -27,7 +28,9 @@ export default function Show() {
                 <div key={comment.id} className="flex flex-col justify-start">
                     <h3>{comment.user.name}</h3>
                     <p>{comment.content}</p>
+                    <FormCreateComment post={post} user={comment.user} onSubmit={() => {}} />
                 </div>
+
             ))}
         </div>
     );
