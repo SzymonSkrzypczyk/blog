@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 use App\Models\Tag;
 use \Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -24,7 +26,7 @@ class PostController extends Controller
                 ->whereHas('tags', function ($query) use ($tag) {
                     $query->where('slug', $tag);
                 })
-                ->paginate(9);
+                ->paginate(12);
         } else {
             $results = Post::with('tags')->paginate(9);
         }
@@ -52,7 +54,23 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        return Post::create($request->all());
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'You must be logged in to create a post.');
+        }
+
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'image' => 'nullable|file',
+        ]);
+
+        $slug = Str::slug($validated['title']);
+        $validated['slug'] = $slug;
+        $validated['user_id'] = auth()->id();
+
+        Post::create($validated);
+
+        return redirect()->route('posts.index');
     }
 
     /**
