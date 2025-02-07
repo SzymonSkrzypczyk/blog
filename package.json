@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "@inertiajs/inertia": "^0.11.1",
+        "@uiw/react-md-editor": "^4.0.5",
         "react-router-dom": "^7.1.5"
     }
 }
