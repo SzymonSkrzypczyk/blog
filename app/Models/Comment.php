@@ -36,7 +36,7 @@ class Comment extends Model
         return parent::save($options);
     }
 
-    public function author(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }

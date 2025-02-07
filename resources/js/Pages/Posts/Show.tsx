@@ -19,6 +19,9 @@ export default function Show() {
         <div>
             <Head title={post.title} />
             <NavBarShow key={post.id} />
+            {tags.map((tag) => (
+                <p>{tag.name}</p>
+            ))}
 
             {comments.map((comment) => (
                 <div key={comment.id} className="flex flex-col justify-start">

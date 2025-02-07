@@ -39,8 +39,6 @@ class PostController extends Controller
     }
 
 
-
-
     /**
      * Show the form for creating a new resource.
      */
@@ -62,7 +60,7 @@ class PostController extends Controller
      */
     public function show(string $id): Response
     {
-        $post = Post::with('comments.author', 'votes', 'tags')->findOrFail($id);
+        $post = Post::with('comments.user', 'votes', 'tags')->findOrFail($id);
 
         $comments = $post->comments;
         $votes = $post->votes;
