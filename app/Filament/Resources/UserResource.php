@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
 
 class UserResource extends Resource
 {
@@ -25,9 +27,15 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make("name")->required(),
-                TextInput::make("email")->required(),
-                TextInput::make("is_admin"),
+                Section::make('User Form')
+                ->schema([
+                    TextInput::make("name")->required(),
+                    TextInput::make("email")->required(),
+                    Select::make("is_admin")->options([
+                        false => 'False',
+                        true => 'True',
+                    ]),
+                ]),
             ]);
     }
 
