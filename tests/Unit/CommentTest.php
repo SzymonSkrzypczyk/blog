@@ -51,11 +51,18 @@ class CommentTest extends TestCase
      */
     public function testCommentHasUserRelationship()
     {
+        // Create a user first
         $user = User::factory()->create();
+
         $comment = Comment::factory()->create(['user_id' => $user->id]);
 
+        $comment->refresh();
+
+        // Assert the user relationship
+        $this->assertNotNull($comment->user, 'The comment should have a user.');
         $this->assertEquals($user->id, $comment->user->id, 'The comment should belong to the user.');
     }
+
 
     /**
      * Test the relationship between Comment and Post.
