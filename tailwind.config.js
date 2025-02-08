@@ -22,8 +22,8 @@ export default {
                 '5xl': '4.210rem',
             },
             fontFamily: {
-                heading: 'Inter',
-                body: 'Inter',
+                heading: 'Asar',
+                body: 'Asar',
             },
             fontWeight: {
                 normal: '400',
