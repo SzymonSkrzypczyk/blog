@@ -49,7 +49,10 @@ class CommentResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->groups([
+                'post.title' => 'post.title',
+                'user.name' => 'user.name',
+            ])->defaultPaginationPageOption(25);
     }
 
     public static function getRelations(): array
@@ -65,5 +68,10 @@ class CommentResource extends Resource
             'create' => Pages\CreateComment::route('/create'),
             'edit' => Pages\EditComment::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

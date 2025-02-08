@@ -63,4 +63,9 @@ class TagResource extends Resource
             'edit' => Pages\EditTag::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 }
