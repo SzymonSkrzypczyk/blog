@@ -12,7 +12,7 @@ export default function AboutLeftSection() {
 
             sections.forEach((section) => {
                 const rect = section.getBoundingClientRect();
-                if (rect.top <= 200 && rect.bottom >= 200) {
+                if (rect.top <= 250 && rect.bottom >= 250) {
                     currentSection = `#${section.id}`;
                 }
             });

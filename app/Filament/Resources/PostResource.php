@@ -18,6 +18,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\FileUpload;
 
 class PostResource extends Resource
 {
@@ -33,6 +34,7 @@ class PostResource extends Resource
                     ->schema([
                         TextInput::make("title")->required(),
                         Textarea::make("content"),
+                        FileUpload::make("image")->image()->directory('images/posts'),
                     ]),
             ]);
     }

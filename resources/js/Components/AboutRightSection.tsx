@@ -1,10 +1,17 @@
 import AboutRightSectionText from "@/Components/AboutRightSectionText";
 import ExperienceCard from "@/Components/ExperienceCard";
 import ProjectCard from "@/Components/ProjectCard";
+import AboutRightSectionPost from "@/Components/AboutRightSectionPost";
+import { Post } from "@/types/Post";
+import {Link} from "@inertiajs/react";
 
-export default function AboutRightSection() {
+interface Props {
+    posts: Post[];
+}
+
+export default function AboutRightSection({ posts }: Props) {
     return (
-        <div className="flex flex-col justify-start bg-[#0E0B14] pl-10 py-10 gap-20">
+        <div className="flex flex-col justify-start bg-[#0E0B14] pl-10 py-10 gap-32">
             <div id="about">
                 <AboutRightSectionText />
             </div>
@@ -17,8 +24,17 @@ export default function AboutRightSection() {
                 <ProjectCard name={"LLM CV Creator"} github_url={"https://github.com/SzymonSkrzypczyk/LLM_cv_maker"} description={"Website created by me and my friends as a project for our course, which aimed at easing the process of creating personalized CVs for a given position."} technologies={["Laravel", "TailwindCSS", "Vue", "Langchain"]} />
                 <ProjectCard name={"Student's ID Generator"} github_url={"https://github.com/SzymonSkrzypczyk/legitymacja"} description={"Generator of student's IDs for AGH University made during lectures, which I found quite boring at the time ;)"} technologies={["Python", "Pillow"]} />
                 <ProjectCard name={"Trivia Generator"} github_url={"https://github.com/SzymonSkrzypczyk/trivia_generator"} description={"Generator of trivia questions that are generated using LLM and serialized in a database using GoLang."} technologies={["GoLang", "FastAPI", "Langchain", "Ollama"]} />
-                <div className="flex flex-row pl-2 ml-2 group gap-2 align-baseline mb-4">
+                <div className="flex flex-row pl-2 ml-2 group gap-2 align-baseline ">
                     <a href="https://github.com/SzymonSkrzypczyk?tab=repositories" className="text-[#e8e4ef] font-bold text-xl">More projects</a>
+                    <img src="storage/images/link-arrow.svg" alt="arrow" className="group-hover:animate-ping duration-700 transition-all w-4"/>
+                </div>
+            </div>
+            <div id="blog" className="mb-4">
+                {posts.map((post) => (
+                    <AboutRightSectionPost key={post.id} post={post} />
+                ))}
+                <div className="flex flex-row pl-2 ml-2 group gap-2 align-baseline pb-20">
+                    <a href="/posts" className="text-[#e8e4ef] font-bold text-xl">More posts</a>
                     <img src="storage/images/link-arrow.svg" alt="arrow" className="group-hover:animate-ping duration-700 transition-all w-4"/>
                 </div>
             </div>

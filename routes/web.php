@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Models\Post;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -34,7 +35,8 @@ Route::resource('comments', CommentController::class);
 
 
 Route::get("/about", function () {
-   return Inertia::render("About");
+    $items = Post::all()->take(3);
+    return Inertia::render("About", ["posts" => $items]);
 });
 
 
