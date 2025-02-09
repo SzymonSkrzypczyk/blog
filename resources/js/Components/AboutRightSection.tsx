@@ -17,7 +17,7 @@ export default function AboutRightSection() {
                 <ProjectCard name={"LLM CV Creator"} github_url={"https://github.com/SzymonSkrzypczyk/LLM_cv_maker"} description={"Website created by me and my friends as a project for our course, which aimed at easing the process of creating personalized CVs for a given position."} technologies={["Laravel", "TailwindCSS", "Vue", "Langchain"]} />
                 <ProjectCard name={"Student's ID Generator"} github_url={"https://github.com/SzymonSkrzypczyk/legitymacja"} description={"Generator of student's IDs for AGH University made during lectures, which I found quite boring at the time ;)"} technologies={["Python", "Pillow"]} />
                 <ProjectCard name={"Trivia Generator"} github_url={"https://github.com/SzymonSkrzypczyk/trivia_generator"} description={"Generator of trivia questions that are generated using LLM and serialized in a database using GoLang."} technologies={["GoLang", "FastAPI", "Langchain", "Ollama"]} />
-                <div className="flex flex-row pl-2 ml-2 group gap-2 align-baseline">
+                <div className="flex flex-row pl-2 ml-2 group gap-2 align-baseline mb-4">
                     <a href="https://github.com/SzymonSkrzypczyk?tab=repositories" className="text-[#e8e4ef] font-bold text-xl">More projects</a>
                     <img src="storage/images/link-arrow.svg" alt="arrow" className="group-hover:animate-ping duration-700 transition-all w-4"/>
                 </div>

@@ -1,26 +1,41 @@
 import AboutMeBulletPointSectionItem from "@/Components/AboutMeBulletPointSectionItem";
-import { Link } from '@inertiajs/react';
 import { useEffect, useState } from "react";
 
 export default function AboutLeftSection() {
-    const [activeSection, setActiveSection] = useState<string>(window.location.hash);
+    const [activeSection, setActiveSection] = useState<string>(window.location.hash || "#about");
 
     useEffect(() => {
-        const handleHashChange = () => {
-            setActiveSection(window.location.hash);
+        const sections = document.querySelectorAll("#about, #experience, #projects, #blog");
+
+        const handleScroll = () => {
+            let currentSection = "#about";
+
+            sections.forEach((section) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 200 && rect.bottom >= 200) {
+                    currentSection = `#${section.id}`;
+                }
+            });
+
+            if (currentSection !== activeSection) {
+                setActiveSection(currentSection);
+                window.history.replaceState(null, "", currentSection);
+            }
         };
 
-        window.addEventListener("hashchange", handleHashChange);
+        window.addEventListener("scroll", handleScroll);
+        handleScroll();
+
         return () => {
-            window.removeEventListener("hashchange", handleHashChange);
+            window.removeEventListener("scroll", handleScroll);
         };
-    }, []);
+    }, [activeSection]);
 
     return (
         <div className="flex flex-col justify-between h-screen pl-10 py-10 bg-[#0E0B14] text-[#E8E4EF] sticky top-0">
             <div>
                 <h1 className="text-4xl mb-1 leading-none whitespace-nowrap font-medium">Szymon Skrzypczyk</h1>
-                <h4 className="text-2xl font-light">Software developer</h4>
+                <h4 className="text-2xl font-light">Software Developer</h4>
 
                 <div className="mt-20 flex flex-col gap-2">
                     <a href="#about">
