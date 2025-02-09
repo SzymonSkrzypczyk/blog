@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Models\Post;
 
+/*
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -27,14 +28,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+*/
+
 // route for posts
 Route::resource('posts', PostController::class);
 
 // route for comments
-Route::resource('comments', CommentController::class);
+// Route::resource('comments', CommentController::class);
 
 
-Route::get("/about", function () {
+Route::get("/", function () {
     $items = Post::all()->take(3);
     return Inertia::render("About", ["posts" => $items]);
 });
