@@ -40,7 +40,7 @@ Route::resource('posts', PostController::class);
 Route::get("/", function () {
     $items = Post::all()->take(3);
     return Inertia::render("About", ["posts" => $items]);
-});
+})->name("home");
 
 
 require __DIR__.'/auth.php';
