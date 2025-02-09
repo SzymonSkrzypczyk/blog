@@ -7,7 +7,6 @@ interface PostCardProps {
 }
 
 export default function PostCard({ post }: PostCardProps) {
-    // Ensure published_at is valid before formatting
     const formattedDate = post.published_at
         ? new Intl.DateTimeFormat("en-US", {
             weekday: "long",
@@ -18,11 +17,11 @@ export default function PostCard({ post }: PostCardProps) {
         : "Date not available";
 
     return (
-        <div className="flex flex-col bg-[#020024] rounded-md hover:bg-[#3a31d8] overflow-hidden h-full">
+        <div className="flex flex-col bg-[#020024] rounded-md hover:bg-[#040040] h-full px-1 py-1 border-2 border-[#040040]">
             <img
                 src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
                 alt="image"
-                className="w-full h-40 object-cover rounded-t-md"
+                className="w-full h-40 object-cover rounded-md"
             />
             <h2 className="text-3xl p-2 text-[#EAE9FC] line-clamp-2">{post.title}</h2>
             <div className="flex flex-wrap gap-2 p-2">

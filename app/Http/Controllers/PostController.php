@@ -20,26 +20,13 @@ class PostController extends Controller
      */
     public function index(Request $request): Response
     {
-        $tag = $request->query('tag');
-
-        if ($tag) {
-            $results = Post::with('tags')
-                ->whereHas('tags', function ($query) use ($tag) {
-                    $query->where('slug', $tag);
-                })
-                ->paginate(12);
-        } else {
-            $results = Post::with('tags')->paginate(9);
-        }
-
-        $all_tags = Tag::all();
+        $results = Post::with('tags')->get();
 
         return Inertia::render('Posts/Index', [
-            'posts' => $results->items(),
-            'tags' => $all_tags,
-            'nextPageUrl' => $results->nextPageUrl(),
+            'posts' => $results
         ]);
     }
+
 
 
     /**

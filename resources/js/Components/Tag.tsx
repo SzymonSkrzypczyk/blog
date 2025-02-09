@@ -7,6 +7,6 @@ interface TagProps {
 
 export default function Tag({ tag }: TagProps) {
     return (
-        <span className="inline-block px-4 py-2 rounded bg-[#473FDE] text-[#EAE9FC] hover:bg-[#5850e1]">{tag.name}</span>
+        <span className="inline-block px-4 py-2 rounded bg-[#473FDE] text-[#EAE9FC] hover:bg-[#5850e1] shadow-md shadow-[#8567c2]">{tag.name}</span>
     );
 }
