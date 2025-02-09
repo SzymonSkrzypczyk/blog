@@ -3,6 +3,7 @@ import { usePage } from '@inertiajs/react';
 import { Post, TagName, Vote, Comment } from '@/types/Post';
 import { PageProps } from "@/types";
 import TagsArticle from "@/Components/TagsArticle";
+import RecommendedPosts from "@/Components/RecommendedPosts";
 
 interface PagePropsShow extends PageProps {
     post: Post;
@@ -28,8 +29,8 @@ export default function Show() {
         <div className="h-screen bg-[#0E0B14] font-family-asar text-[#e8e4ef]">
             <div className="flex flex-col justify-center align-center mx-auto w-3/5 pt-10">
                 <Head title={post.title} />
-                <h1 className="text-center font-extrabold text-3xl">{post.title}</h1>
-                <div className="flex flex-row justify-center text-left   align-center pt-5 opacity-75 gap-5">
+                <h1 className="text-center font-extrabold text-3xl w-3/5 mx-auto">{post.title}</h1>
+                <div className="flex flex-row justify-center text-left   align-center pt-2 opacity-75 gap-5">
                     <p>{minutesNeeded} {minutes} read</p>
                     -
                     <p>{formattedDate}</p>
@@ -40,10 +41,11 @@ export default function Show() {
                 </div>
                 <TagsArticle tags={tags}/>
                 <div className="w-3/5 mx-auto bg-[#4d367a] text-[#4d367a] h-0.5 rounded mt-5"></div>
-                <div className="flex flex-row justify-start items-center gap-2 pb-20 w-3/5 mx-auto">
+                <div className="flex flex-row justify-start items-center gap-2 pb-2 w-3/5 mx-auto">
                     <h2 className="text-[#e8e4ef] font-bold text-xl">More posts</h2>
                     <img src="../storage/images/arrow_down.svg" alt="arrow" className="animate-bounce duration-700 transition-all w-4"/>
                 </div>
+                <RecommendedPosts posts={recentPosts}/>
             </div>
 
         </div>

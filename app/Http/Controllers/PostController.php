@@ -105,7 +105,7 @@ class PostController extends Controller
             'tags' => $tags,
             'points_summed' => $summed_points,
             'html_content' => $html_content,
-            'recommended_articles' => $recommended_articles
+            'recentPosts' => $recommended_articles
         ]);
     }
 

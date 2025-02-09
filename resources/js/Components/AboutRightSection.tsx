@@ -33,7 +33,7 @@ export default function AboutRightSection({ posts }: Props) {
                 {posts.map((post) => (
                     <AboutRightSectionPost key={post.id} post={post} />
                 ))}
-                <div className="flex flex-row pl-2 ml-2 group gap-2 align-baseline pb-20">
+                <div className="flex flex-row pl-2 ml-2 group gap-2 align-baseline pb-50">
                     <a href="/posts" className="text-[#e8e4ef] font-bold text-xl">More posts</a>
                     <img src="storage/images/link-arrow.svg" alt="arrow" className="group-hover:animate-ping duration-700 transition-all w-4"/>
                 </div>
