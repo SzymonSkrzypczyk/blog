@@ -11,6 +11,7 @@ use App\Models\Post;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
+use Parsedown;
 
 class PostController extends Controller
 {
@@ -59,18 +60,25 @@ class PostController extends Controller
         }
 
         $validated = $request->validate([
-            'title' => 'required|string',
+            'title' => 'required|string|unique:posts,title',
             'content' => 'required|string',
             'image' => 'nullable|file',
         ]);
 
+        // Generate a unique slug
         $slug = Str::slug($validated['title']);
+        $count = Post::where('slug', $slug)->count();
+        if ($count > 0) {
+            $slug .= '-' . ($count + 1);
+        }
+
+        // Assign the user ID
         $validated['slug'] = $slug;
         $validated['user_id'] = auth()->id();
 
         Post::create($validated);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
 
     /**
@@ -84,6 +92,10 @@ class PostController extends Controller
         $votes = $post->votes;
         $tags = $post->tags;
 
+        $Parsedown = new Parsedown();
+        $html_content = $Parsedown->text($post->content);
+        $recommended_articles = Post::where('id', '!=', $id)->inRandomOrder()->limit(3)->get();
+
         $summed_points = $votes->sum('vote');
 
         return Inertia::render('Posts/Show', [
@@ -91,7 +103,9 @@ class PostController extends Controller
             'comments' => $comments,
             'votes' => $votes,
             'tags' => $tags,
-            'points_summed' => $summed_points
+            'points_summed' => $summed_points,
+            'html_content' => $html_content,
+            'recommended_articles' => $recommended_articles
         ]);
     }
 
