@@ -29,8 +29,14 @@ export default {
                 normal: '400',
                 bold: '700',
             },
+            colors: {
+                customCodeBg: '#b1a2d2',
+            },
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        require('@tailwindcss/typography')
+    ],
 };

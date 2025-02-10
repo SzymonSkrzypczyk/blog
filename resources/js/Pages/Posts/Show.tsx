@@ -38,7 +38,7 @@ export default function Show() {
                 </div>
                 <div className="w-3/5 mx-auto bg-[#4d367a] text-[#4d367a] h-0.5 rounded mb-1"></div>
                 <div className="flex flex-col justify-center align-center pt-5 w-3/5 align-center mx-auto mb-5">
-                    <div dangerouslySetInnerHTML={{ __html: html_content }} />
+                    <div dangerouslySetInnerHTML={{ __html: html_content }} className='prose prose-invert max-w-none'/>
                 </div>
                 <TagsArticle tags={tags}/>
                 <div className="w-3/5 mx-auto bg-[#4d367a] text-[#4d367a] h-0.5 rounded mt-5"></div>

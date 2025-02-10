@@ -1,7 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@plugin "tailwindcss/typography";
 
 html {
     scroll-behavior: smooth;
+}
+
+@layer components {
+    .prose pre, .prose code {
+        background-color: theme('colors.customCodeBg');
+        color: #003366;
+        border-radius: 8px;
+        padding: 12px;
+    }
 }

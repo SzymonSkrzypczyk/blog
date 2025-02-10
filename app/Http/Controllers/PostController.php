@@ -80,6 +80,7 @@ class PostController extends Controller
         $tags = $post->tags;
 
         $Parsedown = new Parsedown();
+        $Parsedown->setSafeMode(true);
         $html_content = $Parsedown->text($post->content);
         $recommended_articles = Post::where('id', '!=', $id)->inRandomOrder()->limit(3)->get();
 
