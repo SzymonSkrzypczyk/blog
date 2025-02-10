@@ -57,7 +57,7 @@ export default function AboutLeftSection() {
                 <a href="https://github.com/SzymonSkrzypczyk"><img src="storage/images/github.svg" className="w-10" alt="GitHub"/></a>
                 <a href="https://www.linkedin.com/in/szymon-skrzypczyk-b6a4b31b3/"><img src="storage/images/linkedin.svg" className="w-10" alt="LinkedIn"/></a>
                 <a href="mailto:Szymon.Skrzypczyk@vp.pl"><img src="storage/images/mail.svg" className="w-10" alt="Mail"/></a>
-                <a href="tu_moje_cv"><img src="storage/images/cv-icon.svg" className="w-10" alt="CV"/></a>
+                <a href="" onClick={() => {window.open("storage/Szymon_Skrzypczyk_CV.pdf")}}><img src="storage/images/cv-icon.svg" className="w-10" alt="CV"/></a>
             </div>
         </div>
     );
