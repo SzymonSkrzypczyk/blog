@@ -1,9 +1,8 @@
 import { Head } from "@inertiajs/react";
-import React from "react";
+import React, { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
-import NavBar from "@/Components/NavBar";
 import { useForm } from "@inertiajs/react";
-import {Inertia} from "@inertiajs/inertia";
+import { Inertia } from "@inertiajs/inertia";
 
 // Define the interface for the form data
 interface PostFormData {
@@ -20,6 +19,21 @@ export default function Create() {
         image: null,
     });
 
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files ? e.target.files[0] : null;
+        setData("image", file);
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => setImagePreview(reader.result as string);
+            reader.readAsDataURL(file);
+        } else {
+            setImagePreview(null);
+        }
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -34,44 +48,54 @@ export default function Create() {
     };
 
     return (
-        <div>
+        <div className="bg-[#010104] min-h-screen font-family-asar flex flex-col justify-center items-center p-6">
             <Head title="Create Post" />
-            <NavBar />
-            <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
-                <input
-                    type="text"
-                    name="title"
-                    value={data.title}
-                    onChange={(e) => setData("title", e.target.value)}
-                    placeholder="Enter post title"
-                    className="w-full my-4 px-4 py-2 border rounded focus:outline-none"
-                />
-                <MDEditor
-                    value={data.content}
-                    onChange={(value) => setData("content", value || "")}
-                    className="w-full mx-auto my-6 border"
-                />
+            <div className="w-full max-w-3xl flex flex-col items-center">
+                {imagePreview && (
+                    <img
+                        src={imagePreview}
+                        alt="Uploaded Preview"
+                        className="w-full h-64 object-cover rounded-lg mb-4"
+                    />
+                )}
+
                 <input
                     type="file"
                     name="image"
                     accept="image/png, image/jpeg"
-                    onChange={(e) =>
-                        setData("image", e.target.files ? e.target.files[0] : null)
-                    }
-                    className="w-full my-4"
+                    onChange={handleImageChange}
+                    className="w-full my-4 p-2 border border-gray-600 rounded-lg bg-gray-800 text-white text-center"
                 />
 
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white p-2 rounded my-4"
-                    disabled={processing}
-                >
-                    {processing ? "Creating..." : "Create Post"}
-                </button>
-            </form>
+                <form onSubmit={handleSubmit} className="w-full">
+                    <input
+                        type="text"
+                        name="title"
+                        value={data.title}
+                        onChange={(e) => setData("title", e.target.value)}
+                        placeholder="Enter post title"
+                        className="w-full my-4 px-4 py-2 border border-gray-600 rounded focus:outline-none bg-gray-900 text-white"
+                    />
 
-            {errors.title && <div className="text-red-500">{errors.title}</div>}
-            {errors.content && <div className="text-red-500">{errors.content}</div>}
+                    <MDEditor
+                        value={data.content}
+                        onChange={(value) => setData("content", value || "")}
+                        className="w-full my-6 border border-gray-600"
+                        data-color-mode="dark"
+                    />
+
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition"
+                        disabled={processing}
+                    >
+                        {processing ? "Creating..." : "Create Post"}
+                    </button>
+                </form>
+
+                {errors.title && <div className="text-red-500 mt-2">{errors.title}</div>}
+                {errors.content && <div className="text-red-500 mt-2">{errors.content}</div>}
+            </div>
         </div>
     );
 }
