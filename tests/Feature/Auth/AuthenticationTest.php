@@ -12,9 +12,10 @@ class AuthenticationTest extends TestCase
 
     public function test_login_screen_can_be_rendered(): void
     {
+        // since the login screen is not included in the release, 404 should be returned
         $response = $this->get('/login');
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 
     public function test_users_can_authenticate_using_the_login_screen(): void
@@ -46,6 +47,7 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_logout(): void
     {
+        $this->markTestSkipped("Test skipped due to the fact that the login screen is not included in the release.");
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post('/logout');

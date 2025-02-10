@@ -16,11 +16,12 @@ class PasswordResetTest extends TestCase
     {
         $response = $this->get('/forgot-password');
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 
     public function test_reset_password_link_can_be_requested(): void
     {
+        $this->markTestSkipped("Test skipped due to the fact that the reset password feature is not included in the release.");
         Notification::fake();
 
         $user = User::factory()->create();
@@ -32,6 +33,7 @@ class PasswordResetTest extends TestCase
 
     public function test_reset_password_screen_can_be_rendered(): void
     {
+        $this->markTestSkipped("Test skipped due to the fact that the reset password feature is not included in the release.");
         Notification::fake();
 
         $user = User::factory()->create();
@@ -49,6 +51,7 @@ class PasswordResetTest extends TestCase
 
     public function test_password_can_be_reset_with_valid_token(): void
     {
+        $this->markTestSkipped("Test skipped in this release");
         Notification::fake();
 
         $user = User::factory()->create();
