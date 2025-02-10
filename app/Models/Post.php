@@ -14,6 +14,7 @@ class Post extends Model
     use HasFactory;
     protected $fillable = ['user_id', 'title', 'slug', 'content', 'published_at', 'image'];
     protected $casts = ['published_at' => 'datetime'];
+    protected $appends = ['image_url'];
 
     public static function validate($data)
     {
@@ -56,6 +57,11 @@ class Post extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'post_tag');
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->image ? asset($this->image) : null;
     }
 
 }

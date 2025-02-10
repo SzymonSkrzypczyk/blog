@@ -30,6 +30,7 @@ export interface Comment {
 }
 
 export interface Post {
+    image_url: string | undefined;
     id: number;
     title: string;
     slug: string;

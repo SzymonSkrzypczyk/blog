@@ -19,7 +19,7 @@ export default function PostCard({ post }: PostCardProps) {
     return (
         <div className="flex flex-col bg-[#020024] rounded-md hover:bg-[#040040] h-full px-1 py-1 border-2 border-[#040040]">
             <img
-                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+                src={post.image_url ?? "../storage/images/placeholder.png"}
                 alt="image"
                 className="w-full h-40 object-cover rounded-md"
             />

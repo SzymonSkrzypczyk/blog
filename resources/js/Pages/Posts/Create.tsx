@@ -1,10 +1,10 @@
 import { Head } from "@inertiajs/react";
 import React, { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
+import Controls from "@/Components/Controls";
 import { useForm } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
 
-// Define the interface for the form data
 interface PostFormData {
     title: string;
     content: string;
@@ -86,12 +86,13 @@ export default function Create() {
 
                     <button
                         type="submit"
-                        className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition"
+                        className="w-full bg-[#4d367a] text-white font-bold text-2xl p-3 rounded-lg hover:bg-[#533a83] transition"
                         disabled={processing}
                     >
                         {processing ? "Creating..." : "Create Post"}
                     </button>
                 </form>
+                <Controls />
 
                 {errors.title && <div className="text-red-500 mt-2">{errors.title}</div>}
                 {errors.content && <div className="text-red-500 mt-2">{errors.content}</div>}

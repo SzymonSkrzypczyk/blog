@@ -23,7 +23,10 @@ class PostController extends Controller
         $results = Post::with('tags')->get();
 
         return Inertia::render('Posts/Index', [
-            'posts' => $results
+            'posts' => $results->map(function ($post) {
+                $post->image_url = $post->image ? asset($post->image) : null;
+                return $post;
+            })
         ]);
     }
 
@@ -63,6 +66,11 @@ class PostController extends Controller
         $validated['slug'] = $slug;
         $validated['user_id'] = auth()->id();
 
+        if ($request->hasFile("image")){
+            $imagePath = $request->file("image")->store("public/posts", "public");
+            $validated["image"] = "storage/$imagePath";
+        }
+
         Post::create($validated);
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
@@ -87,7 +95,7 @@ class PostController extends Controller
         $summed_points = $votes->sum('vote');
 
         return Inertia::render('Posts/Show', [
-            'post' => $post,
+            'post' => $post->append('image_url'),
             'comments' => $comments,
             'votes' => $votes,
             'tags' => $tags,
