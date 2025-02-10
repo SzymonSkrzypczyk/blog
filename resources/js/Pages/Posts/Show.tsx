@@ -4,6 +4,7 @@ import { Post, TagName, Vote, Comment } from '@/types/Post';
 import { PageProps } from "@/types";
 import TagsArticle from "@/Components/TagsArticle";
 import RecommendedPosts from "@/Components/RecommendedPosts";
+import Controls from "@/Components/Controls";
 
 interface PagePropsShow extends PageProps {
     post: Post;
@@ -41,15 +42,9 @@ export default function Show() {
                 </div>
                 <TagsArticle tags={tags}/>
                 <div className="w-3/5 mx-auto bg-[#4d367a] text-[#4d367a] h-0.5 rounded mt-5"></div>
-                <div className="flex flex-row justify-start items-center gap-2 pb-2 w-3/5 mx-auto">
-                    <h2 className="text-[#e8e4ef] font-bold text-xl">More posts</h2>
-                    <img src="../storage/images/arrow_down.svg" alt="arrow" className="animate-bounce duration-700 transition-all w-4"/>
-                </div>
+                <Controls />
                 <RecommendedPosts posts={recentPosts}/>
-                <div className="fixed left-4 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 align-baseline">
-                    <a href={route("home")}><img src="../storage/images/home-icon.svg" alt="Home" className="w-10"/></a>
-                    <a href="/posts"><img src="../storage/images/blog-icon.svg" alt="Blog" className="w-12"/></a>
-                </div>
+
             </div>
 
         </div>
