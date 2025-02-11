@@ -34,8 +34,8 @@ export default function AboutLeftSection() {
     return (
         <div className="lg:flex lg:flex-col lg:justify-between lg:h-screen lg:pl-10 lg:py-10 bg-[#0E0B14] text-[#E8E4EF] lg:sticky lg:top-0 pl-5 py-10">
             <div>
-                <h1 className="lg:text-4xl lg:mb-1 lg:leading-none lg:whitespace-nowrap lg:font-medium text-2xl font-bold mb-0 ">Szymon Skrzypczyk</h1>
-                <h4 className="lg:text-2xl lg:font-light font-medium text-lg">Software Developer</h4>
+                <h1 className="lg:text-4xl lg:mb-1 lg:leading-none lg:whitespace-nowrap lg:font-medium text-3xl font-extrabold mb-0 ">Szymon Skrzypczyk</h1>
+                <h4 className="lg:text-2xl lg:font-light font-medium text-xl">Software Developer</h4>
 
                 <div className="lg:mt-20 lg:flex lg:flex-col lg:gap-2 hidden ">
                     <a href="#about">

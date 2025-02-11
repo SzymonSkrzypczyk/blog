@@ -1,6 +1,6 @@
 export default function AboutRightSectionText() {
     return (
-        <div className="flex flex-col justify-start gap-4 text-[#E8E4EF] px-2 text-md font-medium">
+        <div className="flex flex-col lg:justify-start lg:gap-4 text-[#E8E4EF] lg:px-2 lg:text-md lg:font-medium font-semibold gap-2 mx-auto ">
             <span>
                 I am a self-taught developer with a passion for creating software that is both functional and visually appealing. I have experience with a variety of technologies, but am mainly focused on Python, GoLang and lately React.
             </span>

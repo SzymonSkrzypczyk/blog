@@ -10,10 +10,10 @@ interface Props {
 export default function ProjectCard({ name, github_url, description, technologies = [] }: Props) {
     return (
         <a href={github_url} target="_blank" rel="noreferrer" className="group">
-            <div className="flex flex-col flex-grow gap-2 shadow-md p-4 rounded-lg hover:bg-[#1d172a] hover:border-[#8567c2] transition duration-500 ease-in-out text-[#e8e4ef] group">
+            <div className="flex flex-col flex-grow lg:gap-2 shadow-md lg:p-4 rounded-lg lg:hover:bg-[#1d172a] lg:hover:border-[#8567c2] transition duration-500 ease-in-out text-[#e8e4ef] group">
                 <h2>
                     <span className="font-bold">{name}</span>
-                    <img src="storage/images/link.svg" alt="Link" className="w-4 inline group-hover:animate-bounce ml-2" />
+                    <img src="storage/images/link.svg" alt="Link" className="w-4 inline group-hover:animate-bounce lg:ml-2 ml-1" />
                 </h2>
                 <p>{description}</p>
                 <div className="flex flex-wrap mt-2">
