@@ -32,12 +32,12 @@ export default function AboutLeftSection() {
     }, [activeSection]);
 
     return (
-        <div className="flex flex-col justify-between h-screen pl-10 py-10 bg-[#0E0B14] text-[#E8E4EF] sticky top-0">
+        <div className="lg:flex lg:flex-col lg:justify-between lg:h-screen lg:pl-10 lg:py-10 bg-[#0E0B14] text-[#E8E4EF] lg:sticky lg:top-0 pl-5 py-10">
             <div>
-                <h1 className="text-4xl mb-1 leading-none whitespace-nowrap font-medium">Szymon Skrzypczyk</h1>
-                <h4 className="text-2xl font-light">Software Developer</h4>
+                <h1 className="lg:text-4xl lg:mb-1 lg:leading-none lg:whitespace-nowrap lg:font-medium text-2xl font-bold mb-0 ">Szymon Skrzypczyk</h1>
+                <h4 className="lg:text-2xl lg:font-light font-medium text-lg">Software Developer</h4>
 
-                <div className="mt-20 flex flex-col gap-2">
+                <div className="lg:mt-20 lg:flex lg:flex-col lg:gap-2 hidden ">
                     <a href="#about">
                         <AboutMeBulletPointSectionItem section="About me" active={activeSection === "#about"} />
                     </a>
@@ -53,11 +53,11 @@ export default function AboutLeftSection() {
                 </div>
             </div>
 
-            <div className="mt-auto mb-10 flex flex-row gap-4 align-baseline">
-                <a href="https://github.com/SzymonSkrzypczyk"><img src="storage/images/github.svg" className="w-10" alt="GitHub"/></a>
-                <a href="https://www.linkedin.com/in/szymon-skrzypczyk-b6a4b31b3/"><img src="storage/images/linkedin.svg" className="w-10" alt="LinkedIn"/></a>
-                <a href="mailto:Szymon.Skrzypczyk@vp.pl"><img src="storage/images/mail.svg" className="w-10" alt="Mail"/></a>
-                <a href="" onClick={() => {window.open("storage/Szymon_Skrzypczyk_CV.pdf")}}><img src="storage/images/cv-icon.svg" className="w-10" alt="CV"/></a>
+            <div className="lg:mt-auto lg:mb-10 flex flex-row gap-4 align-baseline mt-5">
+                <a href="https://github.com/SzymonSkrzypczyk"><img src="storage/images/github.svg" className="lg:w-10 w-5" alt="GitHub"/></a>
+                <a href="https://www.linkedin.com/in/szymon-skrzypczyk-b6a4b31b3/"><img src="storage/images/linkedin.svg" className="lg:w-10 w-5" alt="LinkedIn"/></a>
+                <a href="mailto:Szymon.Skrzypczyk@vp.pl"><img src="storage/images/mail.svg" className="lg:w-10 w-5" alt="Mail"/></a>
+                <a href="" onClick={() => {window.open("storage/Szymon_Skrzypczyk_CV.pdf")}}><img src="storage/images/cv-icon.svg" className="lg:w-10  w-5" alt="CV"/></a>
             </div>
         </div>
     );

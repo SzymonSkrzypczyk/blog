@@ -10,9 +10,9 @@ interface Props {
 
 export default function Index({ posts }: Props) {
     return (
-        <div className="bg-[#0E0B14] h-full font-family-asar">
+        <div className="bg-[#0E0B14] lg:h-full font-family-asar">
             <Head title="About me" />
-            <div className="flex flex-row justify-center align-center gap-20 mx-auto w-3/5 pb-10">
+            <div className="lg:flex lg:flex-row lg:justify-center lg:align-center lg:gap-20 lg:mx-auto lg:w-3/5 lg:pb-10">
                 <AboutLeftSection />
                 <AboutRightSection posts={posts}/>
             </div>
