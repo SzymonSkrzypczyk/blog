@@ -1,8 +1,12 @@
 import AboutMeBulletPointSectionItem from "@/Components/AboutMeBulletPointSectionItem";
 import { useEffect, useState } from "react";
 
-export default function AboutLeftSection() {
-    const [activeSection, setActiveSection] = useState<string>(window.location.hash || "#about");
+interface Props {
+    activeSection: string;
+    setActiveSection: (section: string) => void;
+}
+
+export default function AboutLeftSection({ activeSection, setActiveSection }: Props) {
 
     useEffect(() => {
         const sections = document.querySelectorAll("#about, #experience, #projects, #blog");
@@ -32,7 +36,7 @@ export default function AboutLeftSection() {
     }, [activeSection]);
 
     return (
-        <div className="lg:flex lg:flex-col lg:justify-between lg:h-screen lg:pl-10 lg:py-10 bg-[#0E0B14] text-[#E8E4EF] lg:sticky lg:top-0 pl-5 py-10">
+        <div className="lg:flex lg:flex-col lg:justify-between lg:h-screen lg:pl-10 lg:py-10 bg-[#0E0B14] text-[#E8E4EF] lg:sticky lg:top-0 px-5 py-10">
             <div>
                 <h1 className="lg:text-4xl lg:mb-1 lg:leading-none lg:whitespace-nowrap lg:font-medium text-3xl font-extrabold mb-0 ">Szymon Skrzypczyk</h1>
                 <h4 className="lg:text-2xl lg:font-light font-medium text-xl">Software Developer</h4>
