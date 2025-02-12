@@ -31,11 +31,15 @@ export default function Index({ posts, tags }: PagePropsWithPosts) {
 
             setTimeout(() => {
                 const bottom = document.documentElement.scrollHeight;
-                window.scrollTo({
-                    top: bottom,
-                    behavior: 'smooth'
-                });
+
+                if (window.innerWidth > 1024) {
+                    window.scrollTo({
+                        top: bottom,
+                        behavior: 'smooth'
+                    });
+                }
             }, 100);
+
         }
     };
 
@@ -57,24 +61,27 @@ export default function Index({ posts, tags }: PagePropsWithPosts) {
         .slice(0, loadedCount);
 
     return (
-        <div className="bg-[#010104] min-h-screen text-[#e8e4ef] font-family-asar">
+        <div className="bg-[#010104] min-h-screen text-[#e8e4ef] font-family-asar pb-10">
             <Head title="Szymon Skrzypczyk - Blog"/>
-            <div className="flex flex-col justify-center align-center mx-auto w-3/5 pt-10 px-6">
-                <div className="flex flex-row align-baseline justify-between">
-                    <h1 className="text-3xl font-bold">Latest posts</h1>
-                    <div className="flex justify-center py-4">
+            <div className="flex flex-col justify-center align-center mx-auto w-3/5 pt-10 lg:px-6">
+                <div className="flex lg:flex-row align-baseline justify-between flex-col">
+                    <h1 className="lg:text-3xl lg:font-bold text-3xl font-extrabold whitespace-nowrap text-center">Latest posts</h1>
+                    <Controls/>
+                    <div className="flex lg:justify-center lg:py-4">
                         <input
                             type="text"
                             placeholder="Search posts..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-1/2 px-4 py-2 border rounded-lg focus:outline-none bg-[#4d367a] text-[#e8e4ef] border-none outline-none border-transparent focus:border-transparent focus:ring-0 w-4/5"
+                            className="lg:w-1/2 lg:px-4 lg:py-2 lg:border lg:rounded-lg lg:focus:outline-none lg:bg-[#4d367a]
+                            lg:text-[#e8e4ef] lg:border-none lg:outline-none lg:border-transparent lg:focus:border-transparent
+                            lg:focus:ring-0 lg:w-4/5 hidden lg:block"
                         />
                     </div>
                 </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-6 pt-6 w-3/5 mx-auto">
+            <div className="grid lg:grid-cols-3 gap-6 pt-6 lg:w-3/5 w-4/5 mx-auto">
                 {filteredPosts.map((post, index) => (
                     <motion.div
                         key={post.id}
@@ -91,7 +98,7 @@ export default function Index({ posts, tags }: PagePropsWithPosts) {
                 <div className="flex justify-center pt-6">
                     <button
                         onClick={loadMorePosts}
-                        className="px-6 py-2 bg-[#3a31d8] text-[#e8e4ef] font-bold text-xl rounded-lg hover:bg-[#4a39e4] transition-all animate-bounce"
+                        className="px-6 py-2 bg-[#3a31d8] text-[#e8e4ef] font-bold text-xl rounded-lg hover:bg-[#4a39e4] transition-all lg:animate-bounce"
                     >
                         Load More
                     </button>
@@ -106,8 +113,6 @@ export default function Index({ posts, tags }: PagePropsWithPosts) {
                     className="fixed bottom-4 right-4 p-3 transition-all w-20 cursor-pointer"
                 />
             )}
-
-            <Controls/>
         </div>
     );
 }
