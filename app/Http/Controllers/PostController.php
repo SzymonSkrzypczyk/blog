@@ -66,6 +66,8 @@ class PostController extends Controller
         $validated['slug'] = $slug;
         $validated['user_id'] = auth()->id();
 
+        $validated['published_at'] = now();
+
         if ($request->hasFile("image")){
             $imagePath = $request->file("image")->store("public/posts", "public");
             $validated["image"] = "storage/$imagePath";

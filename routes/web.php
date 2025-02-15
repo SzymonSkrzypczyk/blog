@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\CommentController;
+use App\Http\Middleware\Auth403Middleware;
 use App\Models\Post;
 
 /*
@@ -31,7 +29,13 @@ Route::middleware('auth')->group(function () {
 */
 
 // route for posts
-Route::resource('posts', PostController::class);
+Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('posts/create', [PostController::class, 'create'])->name('posts.create')->middleware(Auth403Middleware::class);
+Route::post('posts', [PostController::class, 'store'])->name('posts.store')->middleware(Auth403Middleware::class);
+Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit')->middleware(Auth403Middleware::class);
+Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update')->middleware(Auth403Middleware::class);
+Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy')->middleware(Auth403Middleware::class);
 
 // route for comments
 // Route::resource('comments', CommentController::class);
