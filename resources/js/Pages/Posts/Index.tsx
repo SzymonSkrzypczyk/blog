@@ -61,7 +61,7 @@ export default function Index({ posts, tags }: PagePropsWithPosts) {
         .slice(0, loadedCount);
 
     return (
-        <div className="bg-[#010104] min-h-screen text-[#e8e4ef] font-family-asar pb-10">
+        <div className="bg-backgroundColor min-h-screen text-[#e8e4ef] font-family-asar pb-10">
             <Head title="Szymon Skrzypczyk - Blog"/>
             <div className="flex flex-col justify-center align-center mx-auto w-3/5 pt-10 lg:px-6">
                 <div className="flex lg:flex-row align-baseline justify-between flex-col">

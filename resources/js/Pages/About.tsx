@@ -11,7 +11,7 @@ interface Props {
 export default function Index({ posts }: Props) {
     const [activeSection, setActiveSection] = useState<string>(window.location.hash || "#about");
     return (
-        <div className="bg-[#0E0B14] lg:h-full font-family-asar">
+        <div className="bg-backgroundColor lg:h-full font-family-asar">
             <Head title="About me" />
             <div className="lg:flex lg:flex-row lg:justify-center lg:align-center lg:gap-20 lg:mx-auto lg:w-3/5 lg:pb-20">
                 <AboutLeftSection activeSection={activeSection} setActiveSection={setActiveSection} />

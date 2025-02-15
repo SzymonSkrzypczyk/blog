@@ -31,6 +31,11 @@ export default {
             },
             colors: {
                 customCodeBg: '#b1a2d2',
+                backgroundColor: "#0e0b14",
+                textColor: "#e8e4ef",
+                primaryColor: "#b1a2d2",
+                secondaryColor: "#4d367a",
+                accentColor: "#8567c2"
             },
         },
     },

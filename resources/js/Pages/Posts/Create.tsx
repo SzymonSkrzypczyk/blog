@@ -67,7 +67,7 @@ export default function Create({ tags }: { tags: Tag[] }) {
     };
 
     return (
-        <div className="bg-[#010104] min-h-screen font-family-asar flex flex-col justify-center items-center p-6">
+        <div className="bg-backgroundColor min-h-screen font-family-asar flex flex-col justify-center items-center p-6">
             <Head title="Create Post" />
             <div className="w-full max-w-3xl flex flex-col items-center">
                 {imagePreview && (

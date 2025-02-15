@@ -27,7 +27,7 @@ export default function Show() {
     }).format(new Date(post.published_at ?? new Date()));
 
     return (
-        <div className="min-h-screen bg-[#0E0B14] font-family-asar text-[#e8e4ef]">
+        <div className="min-h-screen bg-backgroundColor font-family-asar text-[#e8e4ef]">
             <div className="flex flex-col lg:justify-center lg:align-center mx-auto lg:w-3/5 lg:pt-10 pt-6 w-full">
                 <Head title={post.title} />
                 <h1 className="lg:text-center text-t lg:font-extrabold font-bold lg:text-3xl text-2xl lg:w-3/5 w-4/5 mx-auto">{post.title}</h1>
