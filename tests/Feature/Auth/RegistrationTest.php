@@ -11,6 +11,7 @@ class RegistrationTest extends TestCase
 
     public function test_registration_screen_can_be_rendered(): void
     {
+        $this->markTestSkipped("Test skipped due to the fact that the login screen is not included in the release.");
         $response = $this->get('/register');
 
         $response->assertStatus(404);

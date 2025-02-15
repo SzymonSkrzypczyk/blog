@@ -71,7 +71,7 @@ export default function AboutLeftSection({ activeSection, setActiveSection }: Pr
                 <h1 className="lg:text-4xl lg:mb-1 lg:leading-none lg:whitespace-nowrap lg:font-medium text-3xl font-extrabold mb-0">
                     Szymon Skrzypczyk
                 </h1>
-                <h4 className="lg:text-2xl lg:font-light font-medium text-xl">{dynamicText}</h4>
+                <h4 className="lg:text-2xl lg:font-light font-medium text-xl lg:h-[2rem] h-[1.333rem]">{dynamicText}</h4>
 
                 <div className="lg:mt-20 lg:flex lg:flex-col lg:gap-2 hidden ">
                     <a href="#about">

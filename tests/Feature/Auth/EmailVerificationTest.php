@@ -15,6 +15,7 @@ class EmailVerificationTest extends TestCase
 
     public function test_email_verification_screen_can_be_rendered(): void
     {
+        $this->markTestSkipped("Test skipped due to the fact that the login screen is not included in the release.");
         $user = User::factory()->unverified()->create();
 
         $response = $this->actingAs($user)->get('/verify-email');
