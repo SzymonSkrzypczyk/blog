@@ -7,6 +7,36 @@ interface Props {
 }
 
 export default function AboutLeftSection({ activeSection, setActiveSection }: Props) {
+    const [dynamicText, setDynamicText] = useState("");
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const titles = ["Software Developer", "Pythonista", "Latte Macchiato Enjoyer", "Gamer"];
+
+    useEffect(() => {
+        const typingSpeed = isDeleting ? 50 : 100;
+        const fullText = titles[currentIndex];
+
+        const handleTyping = () => {
+            if (!isDeleting) {
+                // Typing effect
+                if (dynamicText.length < fullText.length) {
+                    setDynamicText(fullText.slice(0, dynamicText.length + 1));
+                } else {
+                    setTimeout(() => setIsDeleting(true), 1500);
+                }
+            } else {
+                if (dynamicText.length > 0) {
+                    setDynamicText(fullText.slice(0, dynamicText.length - 1));
+                } else {
+                    setIsDeleting(false);
+                    setCurrentIndex((prevIndex) => (prevIndex + 1) % titles.length);
+                }
+            }
+        };
+
+        const timeout = setTimeout(handleTyping, typingSpeed);
+        return () => clearTimeout(timeout);
+    }, [dynamicText, isDeleting, currentIndex]);
 
     useEffect(() => {
         const sections = document.querySelectorAll("#about, #experience, #projects, #blog");
@@ -38,8 +68,10 @@ export default function AboutLeftSection({ activeSection, setActiveSection }: Pr
     return (
         <div className="lg:flex lg:flex-col lg:justify-between lg:h-screen lg:pl-10 lg:py-10 bg-[#0E0B14] text-[#E8E4EF] lg:sticky lg:top-0 px-5 py-10">
             <div>
-                <h1 className="lg:text-4xl lg:mb-1 lg:leading-none lg:whitespace-nowrap lg:font-medium text-3xl font-extrabold mb-0 ">Szymon Skrzypczyk</h1>
-                <h4 className="lg:text-2xl lg:font-light font-medium text-xl">Software Developer</h4>
+                <h1 className="lg:text-4xl lg:mb-1 lg:leading-none lg:whitespace-nowrap lg:font-medium text-3xl font-extrabold mb-0">
+                    Szymon Skrzypczyk
+                </h1>
+                <h4 className="lg:text-2xl lg:font-light font-medium text-xl">{dynamicText}</h4>
 
                 <div className="lg:mt-20 lg:flex lg:flex-col lg:gap-2 hidden ">
                     <a href="#about">
@@ -58,10 +90,18 @@ export default function AboutLeftSection({ activeSection, setActiveSection }: Pr
             </div>
 
             <div className="lg:mt-auto lg:mb-10 flex flex-row gap-4 align-baseline mt-5">
-                <a href="https://github.com/SzymonSkrzypczyk"><img src="storage/images/github.svg" className="lg:w-10 w-5" alt="GitHub"/></a>
-                <a href="https://www.linkedin.com/in/szymon-skrzypczyk-b6a4b31b3/"><img src="storage/images/linkedin.svg" className="lg:w-10 w-5" alt="LinkedIn"/></a>
-                <a href="mailto:Szymon.Skrzypczyk@vp.pl"><img src="storage/images/mail.svg" className="lg:w-10 w-5" alt="Mail"/></a>
-                <a href="" onClick={() => {window.open("storage/Szymon_Skrzypczyk_CV.pdf")}}><img src="storage/images/cv-icon.svg" className="lg:w-10  w-5" alt="CV"/></a>
+                <a href="https://github.com/SzymonSkrzypczyk">
+                    <img src="storage/images/github.svg" className="lg:w-10 w-5" alt="GitHub" />
+                </a>
+                <a href="https://www.linkedin.com/in/szymon-skrzypczyk-b6a4b31b3/">
+                    <img src="storage/images/linkedin.svg" className="lg:w-10 w-5" alt="LinkedIn" />
+                </a>
+                <a href="mailto:Szymon.Skrzypczyk@vp.pl">
+                    <img src="storage/images/mail.svg" className="lg:w-10 w-5" alt="Mail" />
+                </a>
+                <a href="" onClick={() => { window.open("storage/Szymon_Skrzypczyk_CV.pdf"); }}>
+                    <img src="storage/images/cv-icon.svg" className="lg:w-10  w-5" alt="CV" />
+                </a>
             </div>
         </div>
     );
