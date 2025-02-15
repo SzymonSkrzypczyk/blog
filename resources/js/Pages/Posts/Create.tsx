@@ -9,14 +9,21 @@ interface PostFormData {
     title: string;
     content: string;
     image: File | null;
+    tags: string[];
     [key: string]: any;
 }
 
-export default function Create() {
+interface Tag {
+    id: number;
+    name: string;
+}
+
+export default function Create({ tags }: { tags: Tag[] }) {
     const { data, setData, post, processing, errors } = useForm<PostFormData>({
         title: "",
         content: "",
         image: null,
+        tags: [],
     });
 
     const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -34,6 +41,17 @@ export default function Create() {
         }
     };
 
+    const handleTagSelect = (tagName: string) => {
+        const newTags = [...data.tags];
+        if (newTags.includes(tagName)) {
+            // If tag is already selected, remove it
+            setData("tags", newTags.filter(tag => tag !== tagName));
+        } else {
+            // Otherwise, add it
+            setData("tags", [...newTags, tagName]);
+        }
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -43,6 +61,7 @@ export default function Create() {
         if (data.image) {
             formData.append("image", data.image);
         }
+        formData.append("tags", JSON.stringify(data.tags)); // Send tags as JSON
 
         Inertia.post(route("posts.store"), formData);
     };
@@ -83,6 +102,24 @@ export default function Create() {
                         className="w-full my-6 border border-gray-600"
                         data-color-mode="dark"
                     />
+
+                    {/* Custom Tag Selection */}
+                    <div className="w-full flex overflow-x-auto my-4 space-x-2">
+                        {tags.map((tag) => (
+                            <button
+                                key={tag.id}
+                                type="button"
+                                onClick={() => handleTagSelect(tag.name)}
+                                className={`py-2 px-4 rounded-lg text-white ${
+                                    data.tags.includes(tag.name)
+                                        ? "bg-[#4d367a] hover:bg-[#533a83]"
+                                        : "bg-gray-700 hover:bg-gray-600"
+                                }`}
+                            >
+                                {tag.name}
+                            </button>
+                        ))}
+                    </div>
 
                     <button
                         type="submit"

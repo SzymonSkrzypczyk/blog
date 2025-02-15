@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 use Parsedown;
+use function Webmozart\Assert\Tests\StaticAnalysis\string;
 
 class PostController extends Controller
 {
@@ -37,7 +38,11 @@ class PostController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Posts/Create');
+        $tags = Tag::all();
+
+        return Inertia::render('Posts/Create', [
+            'tags' => $tags,
+        ]);
     }
 
     /**
@@ -53,7 +58,12 @@ class PostController extends Controller
             'title' => 'required|string|unique:posts,title',
             'content' => 'required|string',
             'image' => 'nullable|file',
+            'tags' => 'nullable|string',
         ]);
+
+        if (is_string($validated['tags'])) {
+            $validated['tags'] = json_decode($validated['tags'], true);
+        }
 
         // Generate a unique slug
         $slug = Str::slug($validated['title']);
@@ -73,7 +83,16 @@ class PostController extends Controller
             $validated["image"] = "storage/$imagePath";
         }
 
-        Post::create($validated);
+        $post = Post::create($validated);
+
+        if ($request->has('tags')) {
+            // Get all tags by name
+            $tags = Tag::whereIn('name', $validated['tags'])->get();
+            Log::log('info', $tags);
+
+            // Attach the tags to the post
+            $post->tags()->attach($tags);
+        }
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
