@@ -10,5 +10,7 @@ export default defineConfig({
         }),
         react(),
     ],
-    base: process.env.NODE_ENV === 'production' ? '/' : '/',
+    build: {
+        outDir: 'public/build', // Ensure it outputs to public/build
+    },
 });
