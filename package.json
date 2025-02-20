@@ -30,8 +30,5 @@
         "@uiw/react-md-editor": "^4.0.5",
         "framer-motion": "^12.4.1",
         "react-router-dom": "^7.1.5"
-    },
-    "engines": {
-        "node": "18.x"
     }
 }
