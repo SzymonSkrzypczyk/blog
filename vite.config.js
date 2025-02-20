@@ -11,6 +11,7 @@ export default defineConfig({
         react(),
     ],
     build: {
-        outDir: 'public/build', // Ensure it outputs to public/build
+        outDir: 'public/build',
+        manifest: true
     },
 });
