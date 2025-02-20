@@ -42,9 +42,9 @@ Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.d
 
 
 Route::get("/", function () {
-    //$items = Post::all()->take(3);
-    //return Inertia::render("About", ["posts" => $items]);
-    return Inertia::render("About", ["posts" => []]);
+    $items = Post::all()->take(3);
+    return Inertia::render("About", ["posts" => $items]);
+    // return Inertia::render("About", ["posts" => []]);
 })->name("home");
 
 
